@@ -1,24 +1,46 @@
+-- Create the database
+CREATE DATABASE EXP_7;
+
+-- Use the database
+USE EXP_7;
+
+-- Create the Employee table
+CREATE TABLE Employee (
+    EmpID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Salary DOUBLE
+);
+
+-- Insert sample records
+INSERT INTO Employee (EmpID, Name, Salary) VALUES 
+(1, 'Alice', 50000),
+(2, 'Bob', 60000),
+(3, 'Charlie', 55000);
+
+
 import java.sql.*;
 
 public class EmployeeFetcher {
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/your_database";
-        String user = "root";
-        String password = "your_password";
+        String url = "jdbc:mysql://localhost:3306/EXP_7"; // Database URL
+        String user = "root"; // Your MySQL username
+        String password = "your_password"; // Your MySQL password
 
         try {
-            // Load JDBC Driver
+            // Load MySQL JDBC Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Establish Connection
             Connection conn = DriverManager.getConnection(url, user, password);
 
-            // Execute Query
+            // Execute SQL Query
             String query = "SELECT * FROM Employee";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
             // Display Results
+            System.out.println("Employee Records:");
+            System.out.println("----------------------------");
             while (rs.next()) {
                 System.out.println("EmpID: " + rs.getInt("EmpID") + 
                                    ", Name: " + rs.getString("Name") + 
